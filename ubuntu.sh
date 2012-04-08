@@ -9,11 +9,11 @@ sudo apt-get -y install deb.torproject.org-keyring dpkg-dev autoconf >>/tmp/inst
 sudo apt-get -y build-dep tor >>/tmp/install.log
 
 git clone git://git.torproject.org/debian/tor.git
-cd tor
-./configure && make && sudo make install
-sudo sh -c "ln -sf /etc/tor/torrc /usr/local/etc/tor/torrc"
+$(cd tor && ./configure && make && sudo make install)
+mkdir -p /usr/local/etc/tor/
 sudo cp torrc.config /etc/tor/torrc
-sudo mkdir -p /var/lib/tor /var/log/tor
+sudo sh -c "ln -sf /etc/tor/torrc /usr/local/etc/tor/torrc"
+sudo mkdir -p /var/lib/tor /var/log/tor /usr/local/etc/tor/
 sudo chown -R $(whoami) /var/lib/tor /var/log/tor
 sudo sh -c "echo '_tor hard nofile 32768' >> /etc/security/limits.conf"
 
