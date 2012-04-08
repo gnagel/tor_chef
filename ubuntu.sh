@@ -7,7 +7,7 @@
 # Create the directoryies we will need for tor & privoxy
 mkdir -p /usr/local/etc/tor/
 sudo mkdir -p /var/lib/tor /var/log/tor /usr/local/etc/tor/
-sudo chown -R $(whoami) /var/lib/tor /var/log/tor
+sudo chown -R root /var/lib/tor /var/log/tor
 sudo mkdir -p /etc/sysconfig
 DATE=$(date '+%Y-%m-%d')
 
