@@ -8,11 +8,10 @@ sudo apt-get -y install libtool >>/tmp/install.log
 sudo apt-get -y install deb.torproject.org-keyring dpkg-dev autoconf >>/tmp/install.log
 sudo apt-get -y build-dep tor >>/tmp/install.log
 
-git clone git://git.torproject.org/debian/tor.git
-cd tor
-./configure && make && sudo make install
-sudo sh -c "ln -s /etc/tor/torrc /usr/local/etc/tor/torrc"
-sudo sh -c "cat torrc.config >> /etc/tor/torrc"
+git clone git://git.torproject.org/debian/tor.git /tmp/tor && cd /tmp/tor && ./configure && make && sudo make install
+sudo sh -c "ln -sf /etc/tor/torrc /usr/local/etc/tor/torrc"
+sudo cp torrc.config /etc/tor/torrc
+sudo chown -R $(whoami) /var/lib/tor
 sudo sh -c "echo '_tor hard nofile 32768' >> /etc/security/limits.conf"
 
 # Setup the firewall
